@@ -1,7 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"github.com/adudumayo/go-pool-app/internal/db"
+)
 
 func main() {
-	fmt.Println("vim-go")
+	conn, err := db.ConnectDB()
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer conn.Close(context.Background())
+	fmt.Println("Connected to PostgreSQL successfully!")
 }
